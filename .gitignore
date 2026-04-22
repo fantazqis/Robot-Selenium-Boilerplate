@@ -1,0 +1,22 @@
+# Robot Framework output
+results/
+output.xml
+log.html
+report.html
+*.png
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
