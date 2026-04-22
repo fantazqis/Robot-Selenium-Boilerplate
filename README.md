@@ -99,52 +99,53 @@ Output yang diharapkan: `Robot Framework 7.x.x`
 
 Semua perintah dijalankan dari dalam folder `DemoQA_Boilerplate`.
 
-### Jalankan semua UI test (static + data-driven):
+### Cara 1 — Pakai script (recommended)
+
+Script `scripts/run.sh` menjalankan test **sekaligus** men-generate RF Metrics dan RF Dashboard secara otomatis.
 
 ```bash
+# Beri permission execute (sekali saja)
+chmod +x scripts/run.sh
+
+# Jalankan semua test
+./scripts/run.sh
+
+# Hanya UI tests
+./scripts/run.sh tests/ui/
+
+# Hanya API tests
+./scripts/run.sh tests/api/
+
+# Satu file spesifik
+./scripts/run.sh tests/ui/test_form_static.robot
+
+# Dengan extra options (diteruskan ke robot)
+./scripts/run.sh tests/ui/ --include SMOKE
+./scripts/run.sh tests/ui/ --variable HEADLESS:True
+```
+
+Di Windows CMD (bukan Git Bash):
+```bat
+scripts\run.bat tests\ui\
+```
+
+### Cara 2 — Pakai robot langsung (tanpa auto-generate report)
+
+```bash
+# Semua UI test
 robot --outputdir results tests/ui/
-```
 
-### Jalankan hanya static test:
+# Semua API test
+robot --outputdir results tests/api/
 
-```bash
-robot --outputdir results tests/ui/test_form_static.robot
-```
-
-### Jalankan hanya data-driven test:
-
-```bash
-robot --outputdir results tests/ui/test_form_datadriven.robot
-```
-
-### Jalankan hanya API test:
-
-```bash
-robot --outputdir results tests/api/test_bookstore_api.robot
-```
-
-### Jalankan semua test (UI + API):
-
-```bash
+# Semua test
 robot --outputdir results tests/
-```
 
-### Jalankan berdasarkan tag:
-
-```bash
-# Hanya smoke test
+# Filter by tag
 robot --include SMOKE --outputdir results tests/
-
-# Hanya UI test
-robot --include UI --outputdir results tests/
-
-# Exclude API test
 robot --exclude API --outputdir results tests/
-```
 
-### Jalankan dalam mode headless (tanpa buka browser):
-
-```bash
+# Headless
 robot --variable HEADLESS:True --outputdir results tests/ui/
 ```
 
@@ -163,6 +164,65 @@ Jika ada test yang FAIL, screenshot otomatis tersimpan di:
 
 ```
 results/screenshots/FAIL_<nama_test>_<timestamp>.png
+```
+
+---
+
+## Langkah 6 — Custom Report (Opsional)
+
+Dua pilihan report yang lebih visual dari bawaan RF, keduanya cukup `pip install` saja — tidak butuh Java atau Node.js.
+
+### Install
+
+```bash
+pip install -r requirements.txt
+```
+
+Atau install satu per satu:
+
+```bash
+pip install robotframework-metrics==3.7.0
+pip install robotframework-dashboard
+```
+
+---
+
+### Opsi A — RF Metrics
+
+Menghasilkan satu file HTML statis dengan ringkasan eksekusi, grafik PASS/FAIL, dan breakdown per suite/tag.
+
+**Generate report** (jalankan setelah `robot` selesai):
+
+```bash
+robotmetrics --inputpath results/ --output metrics.html
+```
+
+`--output` hanya menerima nama file (bukan path). File `metrics.html` akan muncul di folder project saat ini.
+
+**Jalankan test + langsung generate:**
+
+```bash
+robot --outputdir results tests/ && robotmetrics --inputpath results/ --output metrics.html
+```
+
+---
+
+### Opsi B — RF Dashboard
+
+Menyimpan hasil ke SQLite dan menghasilkan dashboard HTML interaktif. Cocok untuk melihat **trend antar run** (run 1 vs run 2 vs run 3).
+
+**Generate report:**
+
+```bash
+robotdashboard -o results/output.xml
+```
+
+Hasilnya berupa file `robotdashboard.html` di folder saat ini.
+
+**Jalankan test + langsung generate:**
+
+```bash
+robot --outputdir results tests/ && robotdashboard -o results/output.xml
 ```
 
 ---

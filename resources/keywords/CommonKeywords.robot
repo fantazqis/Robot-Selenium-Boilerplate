@@ -3,6 +3,7 @@ Documentation    Generic browser and UI helpers reusable across all page objects
 Library          SeleniumLibrary
 Library          String
 Library          OperatingSystem
+Library          DateTime
 Resource         ../../config/settings.robot
 
 *** Keywords ***
@@ -78,7 +79,7 @@ Element Text Should Be
 
 Capture Screenshot On Failure
     [Documentation]    Save a timestamped screenshot into the results/screenshots folder.
-    ${timestamp}=      Get Time          format=%Y%m%d_%H%M%S
+    ${timestamp}=      Get Current Date    result_format=%Y%m%d_%H%M%S
     ${clean_name}=     Replace String    ${TEST NAME}    ${SPACE}    _
     ${screenshot_dir}=    Set Variable    ${OUTPUT DIR}/screenshots
     Create Directory      ${screenshot_dir}

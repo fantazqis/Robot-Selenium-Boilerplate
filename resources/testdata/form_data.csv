@@ -1,4 +1,4 @@
 *** Test Cases ***,${first_name},${last_name},${email},${gender},${mobile},${dob_day},${dob_month},${dob_year},${subjects},${hobbies},${address},${state},${city}
 Data Row 01 - Male Student,John,Doe,john.doe@test.com,Male,0812345678,15,January,1990,Maths,Sports,100 Automation Test Street,NCR,Delhi
 Data Row 02 - Female Student,Jane,Smith,jane.smith@test.com,Female,0898765432,20,February,1992,English,Reading,200 Sample Avenue,Uttar Pradesh,Agra
-Data Row 03 - Other with multiple subjects,Alex,Johnson,alex.j@test.com,Other,0821234567,5,March,1995,Computer Science;Physics,Sports;Music,300 Test Boulevard,Rajasthan,Jaipur
+Data Row 03 - Other with multiple subjects,,Johnson,alex.j@test.com,Other,0821234567,5,March,1995,Computer Science;Physics,Sports;Music,300 Test Boulevard,Rajasthan,Jaipur

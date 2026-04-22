@@ -5,6 +5,11 @@ log.html
 report.html
 *.png
 
+# RF Metrics & RF Dashboard
+metrics.html
+robot_dashboard_*.html
+*.db
+
 # Python
 venv/
 __pycache__/
