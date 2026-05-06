@@ -27,6 +27,7 @@ Test Template    Submit Form From CSV Row
 # The template keyword below is called once per row with that row's values.
 *** Test Cases ***
 Practice Form Data Driven
+    No Operation    # placeholder — DataDriver replaces this with CSV rows at runtime
 
 *** Keywords ***
 Submit Form From CSV Row
